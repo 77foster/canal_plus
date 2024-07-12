@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Affichage des données</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    #output {
+      white-space: pre-wrap;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+  <h1>Données JSON</h1>
+  <div id="output"></div>
+
+  <script>
+    // Données JSON à afficher
+    var data = {
+      "nom": "John Doe",
+      "age": 32,
+      "email": "john.doe@example.com",
+      "adresse": {
+        "rue": "123 Main St",
+        "ville": "Anytown",
+        "pays": "États-Unis"
+      },
+      "hobbies": ["lecture", "voyages", "photographie"],
+      "place": {
+        "rue": "123 Main St",
+        "ville": "Anytown",
+        "pays": "États-Unis"
+      },
+    };
+
+    // Afficher les données dans la div #output
+    $('#output').append(JSON.stringify(data, null, 2));
+  </script>
+</body>
+</html>
