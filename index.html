@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rapport Canal Plus</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    <p id="paragraphe">C'est pas encore fait</p>
+    <button onclick="connexion()">Connection</button>
+    <button onclick="getVehicules()">Get</button>
+    <button onclick="dailyReport()">Rapport</button>
+    <button onclick="toXMLGregorianCalendar()">Date</button>
+
+    <form id="myForm">
+        <input type="date" name="date" id="date" required>
+        <select name="voiture" id="select">
+            <option value="">Selectionnez une voiture</option>
+        </select>
+        <button type="submit">OK</button>
+      
+    </form>
+</body>
+<script src="index.js"></script>
+<script>
+    const form = document.getElementById('myForm');
+    
+    form.addEventListener('submit', function(event) {
+      event.preventDefault(); // Empêche le rechargement de la page
+
+      const dateInput = document.getElementById('date');
+      const selectInput = document.getElementById('select');
+
+      const date = dateInput.value;
+      const selectedOption = selectInput.value;
+
+      console.log('Date :', date);
+      console.log('Option sélectionnée :', selectedOption);
+
+      const isoDate = new Date(date + 'T00:00:00Z').toISOString()
+      console.log(isoDate)
+
+      // Vous pouvez ici ajouter la logique pour traiter les valeurs récupérées
+    });
+  </script>
+</html>
