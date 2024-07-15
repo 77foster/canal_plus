@@ -89,7 +89,9 @@ form.addEventListener('submit', async function(event) {
   const startDate = new Date(startDateValue);
   const endDate = new Date(endDateValue);
 
-  const allDates = [];
+
+
+const allDates = [];
   var kilometre = 0;
   const numDays =
     (endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24) + 1;
@@ -107,19 +109,6 @@ form.addEventListener('submit', async function(event) {
     kilometre += km;
   }
 
-  // Afficher le tableau des dates
-/*   const tableau = document
-  .getElementById("kilometrageTable")
- // .getElementsByTagName("tbody");
-  const row = document.createElement("tr");
-
-  
-
-  row.appendChild(nom);
-  row.appendChild(dateDebut);
-  row.appendChild(detaFin);
-  row.appendChild(Kilometrage);
-  tableau.appendChild(row); */
 
   const nom = document.getElementById("nameV");
   nom.textContent = nomVoiture;
@@ -128,7 +117,7 @@ form.addEventListener('submit', async function(event) {
   const detaFin = document.getElementById("dateFin");
   detaFin.textContent = dateString(endDateValue);
   const Kilometrage = document.getElementById("kilometrage");
-  Kilometrage.textContent = kilometre + ' km';
+  Kilometrage.textContent = kilometre + ' km'; 
 }
 )
 
