@@ -1,5 +1,6 @@
 const url = "https://fleet.securysat.com/json/";
 axios.defaults.headers.post["Content-Type"] = "application/json";
+var pdfData = {};
 
 function connexion() {
   axios
@@ -119,6 +120,15 @@ const allDates = [];
   detaFin.textContent = dateString(endDateValue);
   const Kilometrage = document.getElementById("kilometrage");
   Kilometrage.textContent = kilometre.toFixed(2) + ' km'; 
+
+  pdfData = {
+    nomVoiture:nomVoiture,
+    dateDebut:dateString(startDateValue),
+    dateFin:dateString(endDateValue),
+    km:kilometre.toFixed(2) + ' km'
+  }
+
+  console.log(pdfData)
 }
 )
 
@@ -191,4 +201,27 @@ function spinner (data){
       spinner.classList.remove('visually-hidden');
     }
   }
+}
+
+
+function generatePDF() {
+  // Remplacez 'chemin/vers/fichier.html' par le chemin réel de votre fichier HTML
+  const url = '/rapport.html';
+
+  fetch(url)
+    .then(response => response.text())
+    .then(html => {
+      const element = document.createElement('div');
+      element.innerHTML = html;
+
+      document.getElementById("nomVoiture").textContent = pdfData.nomVoiture;
+      document.getElementById("debut").textContent = pdfData.dateDebut
+      document.getElementById("fin").textContent = pdfData.dateFin;
+      document.getElementById("km").textContent = pdf.km
+        .from(element)
+        .save();
+    })
+    .catch(error => {
+      console.error('Erreur lors du chargement du fichier HTML :', error);
+    });
 }
