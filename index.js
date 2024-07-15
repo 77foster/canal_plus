@@ -72,6 +72,7 @@ const form = document.getElementById("form");
 form.addEventListener('submit', async function(event) {
 
   event.preventDefault();
+  spinner(true)
   // Récupérer les valeurs des champs date
   const dateField1 = form.elements.startDate;
   const startDateValue = dateField1.value;
@@ -109,7 +110,7 @@ const allDates = [];
     kilometre += km;
   }
 
-
+  spinner(false)
   const nom = document.getElementById("nameV");
   nom.textContent = nomVoiture;
   const dateDebut = document.getElementById("dateDebut");
@@ -117,7 +118,7 @@ const allDates = [];
   const detaFin = document.getElementById("dateFin");
   detaFin.textContent = dateString(endDateValue);
   const Kilometrage = document.getElementById("kilometrage");
-  Kilometrage.textContent = kilometre + ' km'; 
+  Kilometrage.textContent = kilometre.toFixed(2) + ' km'; 
 }
 )
 
@@ -174,4 +175,20 @@ function dateString(date){
   // Formater la date
   const formattedDate = `${dayOfWeek} ${dayOfMonth} ${monthOfYear} ${year}`;
   return formattedDate
+}
+
+function spinner (data){
+  const spinner = document.getElementById('spinner')
+
+  if (data == false) {
+    if (!spinner.classList.contains('visually-hidden')) {
+      // Si l'élément ne l'a pas, on l'ajoute
+      spinner.classList.add('visually-hidden');
+    }
+  }else{
+    if (spinner.classList.contains('visually-hidden')) {
+      // Si l'élément l'a, on la retire
+      spinner.classList.remove('visually-hidden');
+    }
+  }
 }
