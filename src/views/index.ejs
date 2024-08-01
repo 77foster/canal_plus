@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<%- include('components/head', {title: "Page d'acceuil"}) %>
+<body>
+	<div class="wrapper">
+		<%- include('components/header') %>
+		<%- include('components/side_bar') %>
+			
+			<div class="main-panel">
+				<div class="content">
+					<div class="container-fluid">
+						<h4 class="page-title">Tableau de bord</h4>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="card card-stats card-primary">
+									<div class="card-body">
+										<div class="row">
+											<div class="col-3">
+												<div class="icon-big text-center">
+													<i class="la la-automobile"></i>
+												</div>
+											</div>
+											<div class="col-5 d-flex align-items-center justify-content-center">
+												<div class="numbers">
+													<p class="card-category">Floats</p>
+													<h4 class="card-title">80</h4>
+												</div>
+											</div>
+											<div class="col-4">
+												<div class="icon-big text-center">
+												<i class="la la-caret-right"></i>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="card card-stats card-success">
+									<div class="card-body">
+										<div class="row">
+											<div class="col-3">
+												<div class="icon-big text-center">
+													<i class="la la-folder-open"></i>
+												</div>
+											</div>
+											<div class="col-5 d-flex align-items-center justify-content-center">
+												<div class="numbers">
+													<p class="card-category">Rapports</p>
+													<h4 class="card-title">Juillet 2024</h4>
+												</div>
+											</div>
+											<div class="col-4">
+												<div class="icon-big text-center">
+												<i class="la la-caret-right"></i>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+</div>
+				<div class="row d-flex align-items-center justify-content-center">
+							<div class="col-md-4">
+								<div class="card">
+									<div class="card-header">
+										<h4 class="card-title">Status de la float</h4>
+										<p class="card-category">
+										Status de la float</p>
+									</div>
+									<div class="card-body">
+										<div id="monthlyChart" class="chart chart-pie"></div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="card">
+									<div class="card-header">
+										<h4 class="card-title">Types des véhicules</h4>
+										<p class="card-category">
+											Types des véhicules</p>
+									</div>
+									<div class="card-body">
+										<div id="monthlyChart2" class="chart chart-pie"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<%- include('components/footer') %>
+			</div>
+		</div>
+	</div>
+	<!-- Modal -->
+	<%- include('components/modal') %>
+</body>
+<%- include('components/scripts') %>
+</html>

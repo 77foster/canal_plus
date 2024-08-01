@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<%- include('components/head', {title: "Rapports"}) %>
+<body>
+	<div class="wrapper">
+		<%- include('components/header') %>
+		<%- include('components/side_bar') %>
+			
+			<div class="main-panel">
+                <div class="content">
+					<div class="container-fluid">
+						<h4 class="page-title">Rapports</h4>
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Liste des floats</h4>
+                                <p class="d-flex justify-content-end mx-5">	<button class="btn btn-primary"><i class="icon-big la la-file-pdf-o"></i> Génerer le pdf</button></p>
+                                <p class="card-category">Veillez sélectionner les floats pour avoir le rapport</p>
+                            </div>
+                            <div class="card-body">
+                                <ol class="list-group">
+                                    <li class="list-group-item">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="checkbox" value="">
+                                            <span class="form-check-sign">Mercedes</span>
+                                        </label>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="checkbox" value="">
+                                            <span class="form-check-sign">Toyota</span>
+                                        </label>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="checkbox" value="">
+                                            <span class="form-check-sign">Toyota</span>
+                                        </label>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="checkbox" value="">
+                                            <span class="form-check-sign">Toyota</span>
+                                        </label>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="checkbox" value="">
+                                            <span class="form-check-sign">Toyota</span>
+                                        </label>
+                                    </li>
+                                    <li class="list-group-item" >
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="checkbox" value="">
+                                            <span class="form-check-sign">Toyota</span>
+                                        </label>
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+					</div>
+				</div>
+				<%- include('components/footer') %>
+			</div>
+		</div>
+	</div>
+	<!-- Modal -->
+	<%- include('components/modal') %>
+</body>
+<%- include('components/scripts') %>
+</html>

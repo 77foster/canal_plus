@@ -6,4 +6,13 @@ router.get('/', function(req, res, next) {
   res.render('index');
 });
 
+router.get('/float', function(req, res, next) {
+  res.render('float');
+});
+
+router.get('/rapports', function(req, res, next) {
+  res.render('rapports');
+});
+
+
 module.exports = router;
