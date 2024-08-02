@@ -25,12 +25,16 @@
                                                 <th>#</th>
                                                 <th>Nom</th>
                                                 <th>Model</th>
-                                                <th>Status</th>
-
                                             </tr>
                                         </thead>
                                         <tbody id="float">
-                                           
+                                            <% data.forEach(item => { %>
+                                                <tr>
+                                                    <td><%= item.num %></td>
+                                                    <td><%= item.name %></td>
+                                                    <td><%= item.brand %></td>
+                                                </tr>
+                                              <% }); %>
                                         </tbody>
                                     </table>
                                 </div>

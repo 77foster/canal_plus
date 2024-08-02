@@ -29,7 +29,7 @@ export default class indexApi {
           sessionId: sessionId,
         })
         var res = response.data.vehicles;
-        let i = 0
+        let i = 1
           const options = Object.values(res).map((item) => ({
             num:i++,
             id: item.id,
