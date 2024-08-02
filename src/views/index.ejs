@@ -62,26 +62,17 @@
 </div>
 				<div class="row d-flex align-items-center justify-content-center">
 							<div class="col-md-4">
-								<div class="card">
-									<div class="card-header">
-										<h4 class="card-title">Status de la float</h4>
-										<p class="card-category">
-										Status de la float</p>
-									</div>
-									<div class="card-body">
-										<div id="monthlyChart" class="chart chart-pie"></div>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="card">
+								<div class="text-primary" role="status">
+									<h1 class="visually-hidden" id="loadingMessage">Loading...</span>
+								  </div>
+								<div class="card d-none" id="typesVehicules">
 									<div class="card-header">
 										<h4 class="card-title">Types des véhicules</h4>
 										<p class="card-category">
 											Types des véhicules</p>
 									</div>
-									<div class="card-body">
-										<div id="monthlyChart2" class="chart chart-pie"></div>
+									<div class="card-body" id="typesVehiculesCharts">
+										<canvas id="myChart"  class="chart chart-pie"></canvas>
 									</div>
 								</div>
 							</div>
@@ -96,4 +87,42 @@
 	<%- include('components/modal') %>
 </body>
 <%- include('components/scripts') %>
+<script>
+  const url = "/chart";
+  try {
+    fetch(url)
+	.then(res => res.json())
+	.then(data => {
+		document.getElementById('loadingMessage').classList.add('d-none')
+  document.getElementById('typesVehicules').classList.remove('d-none')
+  document.getElementById('typesVehiculesCharts').classList.remove('d-none')
+const ctx2 = document.getElementById('myChart');
+  const dataq = {
+    labels: Object.keys(data),
+    datasets: [{
+      label: 'Nombre :',
+      data: Object.values(data),
+      borderWidth: 1
+    }]
+  };
+  new Chart(ctx2, {
+    type: "doughnut",
+    data: dataq,
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  });
+	})
+  } catch (error) {
+    console.error(error.message);
+  }
+
+ 
+
+
+</script>
 </html>

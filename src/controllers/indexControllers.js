@@ -23,7 +23,7 @@ export default class indexController{
     if (req.body.end) {
       var endDate = this.#date(req.body.end)
     }
-    res.send('Data Received: ' + JSON.stringify(endDate));
+    res.send('Data Received: ' + JSON.stringify(data));
   }
   async pdf(req, res){
 

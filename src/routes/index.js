@@ -1,9 +1,12 @@
 import express from 'express'
 var router = express.Router();
 import indexController from '../controllers/indexControllers.js';
+import publicController from '../controllers/publicController.js';
 const ctrl = new indexController()
+const publicCtrl = new publicController()
 /* GET home page. */
-router.get('/', (req, res) =>ctrl.index(req, res));
+router.get('/', (req, res) => ctrl.index(req, res));
+router.get('/chart', (req, res) => publicCtrl.index(req, res));
 
 router.get('/float', (req, res) =>ctrl.float(req, res));
 

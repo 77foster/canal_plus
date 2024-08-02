@@ -43,5 +43,35 @@ export default class indexApi {
         
     }
   }
+  async chart(){
+     const sessionId = await this.#connexion()
+    try {
+        const response = await axios
+        .post(url + "getVehicles", {
+          sessionId: sessionId,
+        })
+        var res = response.data.vehicles;
+        const options = Object.values(res).map((item) => ({
+          id: item.id,
+          name: item.name,
+          model: item.model,
+          brand: item.brand,
+          status: item.status
+        }));    
+        var model = {};
+        options.forEach((element) => {
+          if (element.brand in model) {
+            let i = model[element.brand];
+            i = i + 1;
+            model[element.brand] = i;
+          } else {
+            model[element.brand] = 1;
+          }
+        });
+          return model
+    } catch (error) {
+        
+    }
+  }
 
 }
