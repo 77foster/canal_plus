@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<%- include('components/head', {title: "Mon profile"}) %>
+<body>
+	<div class="wrapper">
+		<%- include('components/header') %>
+		<%- include('components/side_bar') %>
+			
+			<div class="main-panel">
+                <div class="content">
+					<div class="container-fluid">
+						<h4 class="page-title">Mon profile</h4>
+                        <div class="row d-flex align-items-start justify-content-center">
+							
+							<div class="col-md-6">
+								<div class="card">
+									<div class="card-header text-center">
+										<img src="assets/img/profile.jpg" alt="" width="100%">
+										<h4 class="mt-2">Kalala Mbayi</h4>
+									</div>
+									<div class="card-body">
+										<div class="d-flex justify-content-between">
+                                            <div>
+                                                <p>mbayifoster@gmail.com</p>
+                                                <p><strong>Utilisateur</strong></p>
+                                            </div>
+                                            <div>
+                                                <button class="btn btn-primary btn-sm" id="btn-edit" onclick="afficherForm()">Editer</button>
+                                            </div>
+                                        </div>
+									</div>
+								</div>
+							</div>
+                            <div class="col-md-6 d-none" id="edit">
+								<div class="card">
+									<div class="card-header text-center">
+										<h4 class="mt-2">Modifier mes données</h4>
+									</div>
+									<div class="card-body">
+										<form>
+                                            <div class="form-group">
+                                                <label for="disableinput">Photo de profile</label>
+                                                <input type="file" class="form-control" id="disableinput" placeholder="Photo de profile">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="disableinput">Adresse email</label>
+                                                <input type="text" class="form-control" id="disableinput" placeholder="mbayifoster@gmail.com" disabled="">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="disableinput">Nom</label>
+                                                <input type="text" class="form-control" id="disableinput" placeholder="Kalala Mbayi">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="disableinput">Ancien mot de passe</label>
+                                                <input type="password" class="form-control" id="disableinput" placeholder="Ancien mot de passe">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="disableinput">Nouveau mot de passe</label>
+                                                <input type="password" class="form-control" id="disableinput" placeholder="Nouveau mot de passe">
+                                            </div>
+                                            <div class="card-action">
+                                                <button class="btn btn-success">Modifier</button>
+                                                <button type="button" class="btn btn-danger" onclick="retirerForm()">Annuler</button>
+                                            </div>
+                                        </form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<%- include('components/footer') %>
+			</div>
+		</div>
+	</div>
+	<!-- Modal -->
+	<%- include('components/modal') %>
+</body>
+<%- include('components/scripts') %>
+<script>
+    const edit = document.getElementById("edit");
+    const btnEdit = document.getElementById("btn-edit")
+    
+    function afficherForm(){
+        if (edit.classList.contains('d-none')) {
+            edit.classList.remove('d-none');
+        }
+        btnEdit.classList.add('d-none')
+    }
+    
+    function retirerForm(){
+        edit.classList.add('d-none')
+        btnEdit.classList.remove('d-none')
+    }
+        
+      </script>
+</html>

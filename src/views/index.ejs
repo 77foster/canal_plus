@@ -22,14 +22,14 @@
 											</div>
 											<div class="col-5 d-flex align-items-center justify-content-center">
 												<div class="numbers">
-													<p class="card-category">Floats</p>
-													<h4 class="card-title">80</h4>
+													<a class="nav-link active" href="/float"><p class="card-category">Floats</p></a>
+													<h4 class="card-title"><%= nbr%> floats</h4>
 												</div>
 											</div>
 											<div class="col-4">
-												<div class="icon-big text-center">
+												<a class="icon-big text-center nav-link active" href="/float">
 												<i class="la la-caret-right"></i>
-												</div>
+												</a>
 											</div>
 										</div>
 									</div>
@@ -51,9 +51,9 @@
 												</div>
 											</div>
 											<div class="col-4">
-												<div class="icon-big text-center">
-												<i class="la la-caret-right"></i>
-												</div>
+												<a class="icon-big text-center nav-link active" href="/float">
+													<i class="la la-caret-right"></i>
+												</a>
 											</div>
 										</div>
 									</div>
@@ -97,17 +97,17 @@
   document.getElementById('typesVehicules').classList.remove('d-none')
   document.getElementById('typesVehiculesCharts').classList.remove('d-none')
 const ctx2 = document.getElementById('myChart');
-  const dataq = {
+  const model = {
     labels: Object.keys(data),
     datasets: [{
-      label: 'Nombre :',
+      label: 'Nombre',
       data: Object.values(data),
       borderWidth: 1
     }]
   };
   new Chart(ctx2, {
-    type: "doughnut",
-    data: dataq,
+    type: "pie",
+    data: model,
     options: {
       scales: {
         y: {

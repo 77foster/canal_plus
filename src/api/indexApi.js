@@ -29,9 +29,7 @@ export default class indexApi {
           sessionId: sessionId,
         })
         var res = response.data.vehicles;
-        let i = 1
           const options = Object.values(res).map((item) => ({
-            num:i++,
             id: item.id,
             name: item.name,
             model: item.model,
@@ -74,4 +72,38 @@ export default class indexApi {
     }
   }
 
+  async  dailyReport(startDate, endDate, idVoiture) {
+    const sessionId = await this.#connexion()
+  
+    return new Promise((resolve, reject) => {
+      var km = 0;
+      axios
+        .post(url + "getDailyVehicleEcoSummary", {
+          sessionId: sessionId,
+          startDate: startDate,
+          endDate: endDate,
+        })
+        .then(function (response) {
+          var res = response.data.dailyEcoSummaries;
+          const options = Object.values(res).map((item) => ({
+            id: item.vehicleId,
+            km: item.realMileage,
+          }));
+          const vehicule = options.find((item) => item.id == idVoiture);
+  
+          if (vehicule) {
+            km = vehicule.km;
+            console.log(vehicule.km);
+            resolve(km);
+          } else {
+            console.log(0);
+            resolve(0);
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+          reject(error);
+        });
+    });
+  }
 }

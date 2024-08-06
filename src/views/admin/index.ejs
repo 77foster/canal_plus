@@ -11,8 +11,11 @@
 					<div class="container-fluid">
 						<h4 class="page-title">Administrateur</h4>
                         <div class="card">
-                            <div class="card-header">
+                            <div class="card-header d-flex justify-content-between">
                                 <div class="card-title">Listes des utilisateurs</div>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                    Ajouter
+                                  </button> 
                             </div>
                             <div class="card-body">
                             <!--     <div class="card-sub">
@@ -26,6 +29,7 @@
                                                 <th>Nom</th>
                                                 <th>Email</th>
                                                 <th>Photo</th>
+                                                <th>Rôle</th>
                                                 <th>Status</th>
 
                                             </tr>
@@ -39,7 +43,8 @@
                                                     <td><%= i + 1 %></td>
                                                     <td><%= nom %></td>
                                                     <td><%= item.email %></td>
-                                                    <td class="text-primary"><img src="assets/img/profile.jpg" alt="" width="auto" height="auto"></td>
+                                                    <td><img src="assets/img/profile.jpg" alt="" width="auto" height="auto"></td>
+                                                    <td><%= item.role %></td>
                                                     <td>
                                                         <% if (item.status != false ) { %>
                                                         <button class="btn btn-success" onclick="status(<%= item.id %>)">Activé</button>
@@ -61,7 +66,7 @@
 			</div>
 		</div>
 	</div>
-	<!-- Modal -->
+
 	<%- include('../components/modal') %>
 </body>
 <%- include('../components/scripts') %>

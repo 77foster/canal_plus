@@ -14,55 +14,61 @@
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title">Liste des floats</h4>
-                               <div class="row">
-                                <div class="col-3">
+                               <div class="d-flex justify-content-between flex-wrap">
+                            <div class="row d-flex justify-content-center mb-3">
+                                <div class="col-6">
                                     <label class="form-check-label">
                                         <span class="form-check-sign">Date du debut</span>
                                         <input type="date" name="start" class="form-control input-pill" id="pillInput" placeholder="Pill Input">
-                                     
                                     </label>
                                  </div>
-                                <div class="col-3">
+                                <div class="col-6">
                                     <label class="form-check-label">
                                         <span class="form-check-sign">Date de fin</span>
                                         <input type="date" name="end" class="form-control input-pill" id="pillInput" placeholder="Pill Input">
                                         
                                     </label>
                                  </div>
-                                
-                                <div class="col-3">
-                                    <p class="d-flex justify-content-center">	<button class="btn btn-warning" type="submit"><i class="icon-big la la-file-pdf-o"></i>Afficher</button></p>
+                            </div>
+                              <div class="row d-flex">
+                                  
+                                <div class="col-6">
+                                    <p class="d-flex justify-content-center">	<button class="btn btn-warning" type="submit"><i class="icon-big la la-angle-double-down"></i>Afficher</button></p>
                                 </div>
-                                <div class="col-3">
+                                <div class="col-6">
                                     <p class="d-flex justify-content-center ">	<a class="btn btn-primary" href="/pdf"><i class="icon-big la la-file-pdf-o"></i> Génerer le pdf</a></p>
                                 </div>
+                              </div>
 
                                </div>
                                 <p class="card-category">Veillez sélectionner les floats pour avoir le rapport</p>
                             </div>
-                            <div class="card-body row">
-                                <ol class="list-group col-5">
-                                    <li class="list-group-item">
-                                        <label class="form-check-label">
-                                            <input class="form-check-input" type="checkbox"  id="selectAll">
-                                            <span class="form-check-sign">Tous selectionner</span>
-                                        </label>
-                                    </li>
-                                    <% data.forEach(item=>{%>
-<li class="list-group-item">
+                            <div class="mx-2 my-4 card-body row d-flex justify-content-between">
+                               
+                                <ol class="list-group col-md-6 mb-5">
+                                 <li class="list-group-item mt-2">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="checkbox"  id="selectAll">
+                                        <span class="form-check-sign">Tous selectionner</span>
+                                    </label>
+                                </li>
+                                    <% data.forEach((item, i)=>{%>
+                                    <li class="list-group-item mt-2">
                                         <label class="form-check-label">
                                             <input class="form-check-input option" name="<%= item.id %>" type="checkbox" value="<%= item.id %>">
-                                            <span class="form-check-sign"><%= item.name %></span>
+                                            <span class="form-check-sign"><%= i+1 %>. <%= item.name %></span>
                                         </label>
                                     </li>
                                         <% }) ; %>
                                 </ol>
-                                <div class="table-responsive col-7">
+                              <div class="table-responsive col-md-6">
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>
                                                 <th>#</th>
                                                 <th>Nom</th>
+                                                <th>Date du début</th>
+                                                <th>Date de fin</th>
                                                 <th>Kilométrage</th>
                                             </tr>
                                         </thead>
@@ -72,12 +78,13 @@
                                                     <td><%= item.num %></td>
                                                     <td><%= item.name %></td>
                                                     <td><%= item.brand %></td>
+                                                    <td><%= item.brand %></td>
+                                                    <td><%= item.brand %></td>
                                                 </tr>
                                               <% }); %>
                                         </tbody>
                                     </table>
-                                </div>
-                            </div>
+                                </div></div>
                         </div>
                       </form>
 					</div>

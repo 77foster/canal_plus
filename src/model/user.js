@@ -13,6 +13,7 @@ User.init( {
     email: DataTypes.STRING,
     password: DataTypes.STRING,
     photo: DataTypes.STRING,
+    role: DataTypes.STRING,
     status: DataTypes.BOOLEAN,
   }, {sequelize, modelName: 'user'} );
 

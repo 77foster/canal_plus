@@ -1,11 +1,11 @@
-import puppeteer from 'puppeteer'
 import indexApi from '../api/indexApi.js';
 const api = new indexApi()
 export default class indexController{
 
-  index(req, res ){
-    
-    res.render('index');
+  async index(req, res ){
+    const data = await api.getVehicules();
+    const lengthData = data.length ;
+    res.render('index', {nbr:lengthData});
   }
   async float(req, res){
     const data = await api.getVehicules()
@@ -52,6 +52,11 @@ export default class indexController{
       console.error(err);
       res.status(500).send('Erreur lors de la génération du PDF');
     }*/
+  }
+
+  profil(req, res ){
+    
+    res.render('profil');
   }
 
   #date(date) {

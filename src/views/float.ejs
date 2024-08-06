@@ -28,9 +28,9 @@
                                             </tr>
                                         </thead>
                                         <tbody id="float">
-                                            <% data.forEach(item => { %>
+                                            <% data.forEach((item, i) => { %>
                                                 <tr>
-                                                    <td><%= item.num %></td>
+                                                    <td><%= i+1 %></td>
                                                     <td><%= item.name %></td>
                                                     <td><%= item.brand %></td>
                                                 </tr>
