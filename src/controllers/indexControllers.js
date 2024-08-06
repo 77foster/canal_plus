@@ -17,13 +17,14 @@ export default class indexController{
   }
   async rapportsPost(req, res){
     let data = req.body;
-    if (req.body.start) {
-      var startDate = this.#date(req.body.start)
+    const newData = {};
+    for (const key in data) {
+      if (key !== "start" && key !== "end") {
+        newData[key] = data[key];
+      }
     }
-    if (req.body.end) {
-      var endDate = this.#date(req.body.end)
-    }
-    res.send('Data Received: ' + JSON.stringify(data));
+    const nData = await api.rapport(data['start'], data['end'], newData)
+    res.send('Data Received: ' + JSON.stringify(nData));
   }
   async pdf(req, res){
 
