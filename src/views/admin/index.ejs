@@ -31,19 +31,20 @@
                                             </tr>
                                         </thead>
                                         <tbody id="float">
-                                            <% users.forEach(item => { 
+                                            <% users.forEach((item, i) => { 
                                                 const nom = item.prenom + " " + item.nom
+                                               
                                                 %>
                                                 <tr>
-                                                    <td><%= item.nom %></td>
+                                                    <td><%= i + 1 %></td>
                                                     <td><%= nom %></td>
                                                     <td><%= item.email %></td>
                                                     <td class="text-primary"><img src="assets/img/profile.jpg" alt="" width="auto" height="auto"></td>
                                                     <td>
-                                                        <% if (item.status === 1 ) { %>
-                                                        <button class="btn btn-success">Activé</button>
+                                                        <% if (item.status != false ) { %>
+                                                        <button class="btn btn-success" onclick="status(<%= item.id %>)">Activé</button>
                                                         <% }else{ %>
-                                                            <button class="btn btn-danger">Désactivé</button>
+                                                            <button class="btn btn-danger" onclick="status(<%= item.id %>)">Désactivé</button>
                                                         <% } %> 
                                                     </td>
                                                    </tr>
@@ -64,4 +65,26 @@
 	<%- include('../components/modal') %>
 </body>
 <%- include('../components/scripts') %>
+<script>
+
+    function status(id){
+        const url = "/api/status/"+id;
+        const data = {
+            status:true
+        }
+        console.log(data)
+        const options = {
+            method:'PUT',
+            headers:{
+                'Content-Type':'applications/json'
+            },
+            body:JSON.stringify(data)
+        }
+    fetch(url, options)
+	.then(res => res.json())
+	.then(data => {
+    location.reload(true)
+    })
+    }
+   </script>
 </html>

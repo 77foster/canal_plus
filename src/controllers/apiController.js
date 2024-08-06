@@ -31,15 +31,23 @@ export default class apiController {
 
     async status(req, res){
         const user = await User.findByPk(req.params.id)
-        if(user){
-            await user.update(req.body)
-            const data = {
-                msg:"success",
-                data:user,
-                code:201
-            }
-            res.json(data)
+        if(user && user.status == true){
+            await user.update({
+                status:false
+            })
+           
+        }else{
+            await user.update({
+                status:true
+            })
         }
+
+        const data = {
+            msg:"success",
+            data:req.body,
+            code:201
+        }
+        res.send(user.status)
     }
     async update(req, res){
         const user = await User.findByPk(req.params.id)
