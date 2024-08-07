@@ -32,21 +32,28 @@
                             </div>
                               <div class="row d-flex">
                                   
-                                <div class="col-4">
-                                    <p class="d-flex justify-content-center">	<button class="btn btn-warning" type="submit"><i class="icon-big la la-angle-double-down"></i>Afficher</button></p>
+                                <div class="col-6">
+                                    <p class="d-flex justify-content-center">
+                                        <button class="btn btn-dark" type="submit">
+                                            <i class="icon-big la la-angle-double-down"></i>
+                                            Afficher
+                                        </button>
+                                        </p>
                                 </div>
-                                <div class="col-4">
-                                    <p class="d-flex justify-content-center ">	<button class="btn btn-primary" ><i class="icon-big la la-file-pdf-o"></i> Génerer le pdf</button></p>
-                                </div>
-                                <div class="col-4" id="new">
-                                  <p class="d-flex justify-content-center ">	<button class="btn btn-info" ><i class="icon-big la la-file-pdf-o" onclick="newRapport()"></i>New</button></p>
+                                <div class="col-6" id="new">
+                                  <p class="d-flex justify-content-center ">	
+                                    <button class="btn btn-primary" >
+                                        <i class="icon-big la la-share" onclick="newRapport()"></i>
+                                        New
+                                    </button>
+                                </p>
                               </div>
                               </div>
 
                                </div>
                                 <p class="card-category">Veillez sélectionner les floats pour avoir le rapport</p>
-                                <div class="text-info text-center d-none" role="status" id="loading-message">
-                                  <h1 class="visually-hidden">Loading...</span>
+                                <div class="text-dark text-center d-none" role="status" id="loading-message">
+                                  <h1 class="visually-hidden">Loading<i class="icon-big la la-spinner"></i></span>
                                 </div>
                               </div>
                             <div class="mx-2 my-4 card-body row d-flex justify-content-start">
@@ -70,18 +77,19 @@
                         </div>
                       </form>
                       <div class="table-responsive d-none" id="body-float">
-                      <div class="card">
+                      <div class="card" id="pdf">
                         <div class="card-header text-center">
                           <h4 class="card-title">Rapports de Kilométrage</h4>
                          <div class="d-flex justify-content-between flex-wrap">
                           <div class="col-6">
                             <label class="form-check-label">
                                 <span class="form-check-sign" id="start-text">Date du debut</span>
+                                <span class="form-check-sign" id="end-text">Date de fin</span>
                             </label>
                          </div>
                         <div class="col-6">
                             <label class="form-check-label">
-                                <span class="form-check-sign" id="end-text">Date de fin</span>
+                                <span class="form-check-sign" id="date-actuelle"></span>
                             </label>
                          </div>
                          </div>
@@ -98,11 +106,19 @@
                                 </tr>
                             </thead>
                             <tbody id="float">
-                            
                             </tbody>
                         </table>
+                       
                         </div>
                       </div>
+                      <div class="conatainer py-3">
+                        <p class="d-flex justify-content-center ">
+                            <button class="btn btn-primary">
+                                <i class="icon-big la la-file-pdf-o"></i> 
+                                Génerer le pdf
+                            </button>
+                        </p>
+                    </div>
                     </div>
 					</div>
 				</div>
@@ -114,23 +130,7 @@
 	<%- include('components/modal') %>
 </body>
 <%- include('components/scripts') %>
-<script>
-    const selectAllCheckbox = document.getElementById('selectAll');
-    const optionCheckboxes = document.querySelectorAll('.option');
-  
-    selectAllCheckbox.addEventListener('change', function() {
-      optionCheckboxes.forEach(checkbox => {
-        checkbox.checked = this.checked;
-      });
-    });
-  
-    optionCheckboxes.forEach(checkbox => {
-      checkbox.addEventListener('change', function() {
-        const allChecked = Array.from(optionCheckboxes).every(checkbox => checkbox.checked);
-        selectAllCheckbox.checked = allChecked;
-      });
-    });
-  </script>
+
   	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.8/handlebars.min.js"></script>
     <script id="entry-template" type="text/x-handlebars-template">
       {{#each data}}
@@ -143,77 +143,5 @@
   </tr>
 {{~/each}}
     </script>
-<script>
-const select = document.getElementById('select-float')
-const floatRapport = document.getElementById('body-float')
-const loading = document.getElementById('loading-message')
-const btnNew = document.getElementById('new')
-const start = document.getElementById('start')
-const end = document.getElementById('end')
-const startText = document.getElementById('start-text')
-const endText = document.getElementById('end-text')
-
-function newRapport(){
-  btnNew.classList.add()
-  select.classList.remove('d-none')
-          select.classList.add('d-flex')
-          loading.classList.add('d-none')
-}
-
-start.addEventListener('input', function(){
-  const valueStart = this.value
-  startText.textContent = "Date du début : " +valueStart
-} )
-end.addEventListener('input', function(){
-  const valueEnd = this.value
-  endText.textContent = "Date de fin : " +valueEnd
-} )
-
-
- const form = document.getElementById('formRapport')
-
- form.addEventListener('submit', (event)=>{
-    event.preventDefault()
-   
-    select.classList.add('d-none')
-    select.classList.remove('d-flex')
-    loading.classList.remove('d-none')
-    let formData = new FormData(event.currentTarget);
-    let formObj = Object.fromEntries(formData)
-
-console.log(formObj)
-     fetch('/api/rapport', {
-            method: 'POST',
-            headers: {
-                'Content-type':'application/json',
-            },
-            body: JSON.stringify(formObj)
-        })
-        .then(response => response.json())
-        .then(data => {
-          float(data)
-          floatRapport.classList.remove('d-none')
-          loading.classList.add('d-none')
-            console.log("Reponse du serveur :", data)
-        })
-        .catch((error) => {
-          select.classList.remove('d-none')
-          select.classList.add('d-flex')
-          loading.classList.add('d-none')
-
-            console.log("Erreur:", error);
-        });
- 
- })
-
-
- function float(data){
- var source = document.getElementById("entry-template").innerHTML;
-var template = Handlebars.compile(source);
-
-var context = { data: data };
-var html = template(context);
-document.getElementById('float').innerHTML = html;
-}
- </script>
+    <script src="assets/js/scripts/script_rapport.js"></script>
 </html>

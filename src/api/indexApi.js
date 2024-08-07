@@ -78,6 +78,7 @@ export default class indexApi {
         })
         .then(function (response) {
           var res = response.data.dailyEcoSummaries;
+
           const options = Object.values(res).map((item) => ({
             id: item.vehicleId,
             km: item.realMileage,
@@ -127,6 +128,7 @@ export default class indexApi {
   async rapport(startDate, endDate, vehicules) {
     const rapports = [];
     let i = 0;
+
     for (const key in vehicules) {
       i++;
       const km = await this.#parDate(startDate, endDate, vehicules[key]);
