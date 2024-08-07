@@ -5,7 +5,20 @@
 	<div class="wrapper">
 		<%- include('components/header') %>
 		<%- include('components/side_bar') %>
-			
+    <style>
+      /* Styles pour l'impression */
+      @media print {
+        body * {
+          visibility: hidden;
+        }
+        #print-content {
+          visibility: visible;
+          position: absolute;
+          left: 0;
+          top: 0;
+        }
+      }
+    </style>
 			<div class="main-panel">
                 <div class="content">
 					<div class="container-fluid">
@@ -77,7 +90,7 @@
                         </div>
                       </form>
                       <div class="table-responsive d-none" id="body-float">
-                      <div class="card" id="pdf">
+                      <div class="card" id="print-content">
                         <div class="card-header text-center">
                           <h4 class="card-title">Rapports de Kilométrage</h4>
                          <div class="d-flex justify-content-between flex-wrap">
@@ -113,7 +126,7 @@
                       </div>
                       <div class="conatainer py-3">
                         <p class="d-flex justify-content-center ">
-                            <button class="btn btn-primary">
+                            <button class="btn btn-primary" onclick="toPdf()">
                                 <i class="icon-big la la-file-pdf-o"></i> 
                                 Génerer le pdf
                             </button>
@@ -129,8 +142,9 @@
 	<!-- Modal -->
 	<%- include('components/modal') %>
 </body>
-<%- include('components/scripts') %>
 
+<%- include('components/scripts') %>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.8/handlebars.min.js"></script>
     <script id="entry-template" type="text/x-handlebars-template">
       {{#each data}}
@@ -143,5 +157,6 @@
   </tr>
 {{~/each}}
     </script>
+    
     <script src="assets/js/scripts/script_rapport.js"></script>
 </html>

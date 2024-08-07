@@ -15,7 +15,7 @@ export default class indexController{
     const data = await api.getVehicules()
     res.render('rapports', {data});
   }
-  async rapportsPost(req, res){
+  async rapportPost(req, res){
     let data = req.body;
     const newData = {};
     for (const key in data) {
@@ -24,7 +24,7 @@ export default class indexController{
       }
     }
     const nData = await api.rapport(data['start'], data['end'], newData)
-    res.send('Data Received: ' + JSON.stringify(nData));
+    res.render('pdf');
   }
   async pdf(req, res){
 
@@ -59,6 +59,11 @@ export default class indexController{
     
     res.render('profil');
   }
+
+  async chart(req, res){
+    const data = await api.chart()
+    res.json(data)
+}
 
   #date(date) {
     const IsoDate = new Date(date);

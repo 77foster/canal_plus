@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="card" id="content-pdf">
+        <div class="card-header text-center">
+          <h4 class="card-title">Rapports de Kilométrage</h4>
+         <div class="d-flex justify-content-between flex-wrap">
+          <div class="col-6">
+            <label class="form-check-label">
+                <span class="form-check-sign" id="start-text">Date du debut</span>
+                <span class="form-check-sign" id="end-text">Date de fin</span>
+            </label>
+         </div>
+        <div class="col-6">
+            <label class="form-check-label">
+                <span class="form-check-sign" id="date-actuelle"></span>
+            </label>
+         </div>
+         </div>
+    </div>
+        <div class="card-body">
+          <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nom</th>
+                    <th>Date du début</th>
+                    <th>Date de fin</th>
+                    <th>Kilométrage</th>
+                </tr>
+            </thead>
+            <script id="entry-template" type="text/x-handlebars-template">
+                {{#each data}}
+            <tr>
+              <td>{{this.index }}</td>
+              <td>{{ this.name }}</td>
+              <td>{{ this.startDate }}</td>
+              <td>{{ this.endDate }}</td>
+              <td>{{ this.kilometre }} km</td>
+            </tr>
+          {{~/each}}
+              </script>
+            </tbody>
+        </table>
+       
+        </div>
+      </div>
+</body>
+</html>

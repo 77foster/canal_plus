@@ -12,7 +12,7 @@
 						<h4 class="page-title">Tableau de bord</h4>
 						<div class="row">
 							<div class="col-md-6">
-								<div class="card card-stats card-primary">
+								<div class="card card-stats card-info">
 									<div class="card-body">
 										<div class="row">
 											<div class="col-3">
@@ -36,7 +36,7 @@
 								</div>
 							</div>
 							<div class="col-md-6">
-								<div class="card card-stats card-success">
+								<div class="card card-stats card-primary">
 									<div class="card-body">
 										<div class="row">
 											<div class="col-3">
@@ -63,7 +63,9 @@
 				<div class="row d-flex align-items-center justify-content-center">
 							<div class="col-md-4">
 								<div class="text-primary" role="status">
-									<h1 class="visually-hidden" id="loadingMessage">Loading...</span>
+										<div class="text-dark text-center" role="status" id="loading-message">
+											<h1 class="visually-hidden">Loading<i class="icon-big la la-spinner"></i></span>
+										  </div>
 								  </div>
 								<div class="card d-none" id="typesVehicules">
 									<div class="card-header">
@@ -87,13 +89,14 @@
 	<%- include('components/modal') %>
 </body>
 <%- include('components/scripts') %>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
   const url = "/chart";
   try {
     fetch(url)
 	.then(res => res.json())
 	.then(data => {
-		document.getElementById('loadingMessage').classList.add('d-none')
+		document.getElementById('loading-message').classList.add('d-none')
   document.getElementById('typesVehicules').classList.remove('d-none')
   document.getElementById('typesVehiculesCharts').classList.remove('d-none')
 const ctx2 = document.getElementById('myChart');
