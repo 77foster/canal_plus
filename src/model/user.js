@@ -10,11 +10,18 @@ class User extends Model{}
 User.init( {
     nom: DataTypes.STRING,
     prenom: DataTypes.STRING,
-    email: DataTypes.STRING,
+    email: {
+      type: DataTypes.STRING,
+      allowNull:false,
+      unique:true
+    },
     password: DataTypes.STRING,
-    photo: DataTypes.STRING,
+    photo: DataTypes.TEXT,
     role: DataTypes.STRING,
-    status: DataTypes.BOOLEAN,
+    status: {
+      type:DataTypes.BOOLEAN,
+      defaultValue:true
+    },
   }, {sequelize, modelName: 'user'} );
 
 await sequelize.sync();

@@ -10,7 +10,7 @@
                 <div class="content">
 					<div class="container-fluid">
 						<h4 class="page-title">Rapports</h4>
-                      <form action="/rapports" method="post">
+                      <form id="formRapport">
                         <div class="card">
                             <div class="card-header">
                                 <h4 class="card-title">Liste des floats</h4>
@@ -19,74 +19,91 @@
                                 <div class="col-6">
                                     <label class="form-check-label">
                                         <span class="form-check-sign">Date du debut</span>
-                                        <input type="date" name="start" class="form-control input-pill" id="pillInput" placeholder="Pill Input">
+                                        <input type="date" id="start" name="start" class="form-control input-pill" id="pillInput" placeholder="Pill Input" required>
                                     </label>
                                  </div>
                                 <div class="col-6">
                                     <label class="form-check-label">
                                         <span class="form-check-sign">Date de fin</span>
-                                        <input type="date" name="end" class="form-control input-pill" id="pillInput" placeholder="Pill Input">
+                                        <input type="date" id="end" name="end" class="form-control input-pill" id="pillInput" placeholder="Pill Input" required>
                                         
                                     </label>
                                  </div>
                             </div>
                               <div class="row d-flex">
                                   
-                                <div class="col-6">
+                                <div class="col-4">
                                     <p class="d-flex justify-content-center">	<button class="btn btn-warning" type="submit"><i class="icon-big la la-angle-double-down"></i>Afficher</button></p>
                                 </div>
-                                <div class="col-6">
-                                    <p class="d-flex justify-content-center ">	<a class="btn btn-primary" href="/pdf"><i class="icon-big la la-file-pdf-o"></i> Génerer le pdf</a></p>
+                                <div class="col-4">
+                                    <p class="d-flex justify-content-center ">	<button class="btn btn-primary" ><i class="icon-big la la-file-pdf-o"></i> Génerer le pdf</button></p>
                                 </div>
+                                <div class="col-4" id="new">
+                                  <p class="d-flex justify-content-center ">	<button class="btn btn-info" ><i class="icon-big la la-file-pdf-o" onclick="newRapport()"></i>New</button></p>
+                              </div>
                               </div>
 
                                </div>
                                 <p class="card-category">Veillez sélectionner les floats pour avoir le rapport</p>
-                            </div>
-                            <div class="mx-2 my-4 card-body row d-flex justify-content-between">
-                               
-                                <ol class="list-group col-md-6 mb-5">
-                                 <li class="list-group-item mt-2">
+                                <div class="text-info text-center d-none" role="status" id="loading-message">
+                                  <h1 class="visually-hidden">Loading...</span>
+                                </div>
+                              </div>
+                            <div class="mx-2 my-4 card-body row d-flex justify-content-start">
+                                <ol class="flex-wrap d-flex" id="select-float">
+                                 <li class="list-group-item m-2">
                                     <label class="form-check-label">
                                         <input class="form-check-input" type="checkbox"  id="selectAll">
                                         <span class="form-check-sign">Tous selectionner</span>
                                     </label>
                                 </li>
                                     <% data.forEach((item, i)=>{%>
-                                    <li class="list-group-item mt-2">
+                                    <li class="list-group-item m-2">
                                         <label class="form-check-label">
-                                            <input class="form-check-input option" name="<%= item.name %>" type="checkbox" value="<%= item.id %>">
+                                            <input class="form-check-input option" id="<%= item.name %>" name="<%= item.name %>" type="checkbox" value="<%= item.id %>">
                                             <span class="form-check-sign"><%= i+1 %>. <%= item.name %></span>
                                         </label>
                                     </li>
                                         <% }) ; %>
                                 </ol>
-                              <div class="table-responsive col-md-6">
-                                    <table class="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Nom</th>
-                                                <th>Date du début</th>
-                                                <th>Date de fin</th>
-                                                <th>Kilométrage</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="float">
-                                            <% data.forEach(item => { %>
-                                                <tr>
-                                                    <td><%= item.num %></td>
-                                                    <td><%= item.name %></td>
-                                                    <td><%= item.brand %></td>
-                                                    <td><%= item.brand %></td>
-                                                    <td><%= item.brand %></td>
-                                                </tr>
-                                              <% }); %>
-                                        </tbody>
-                                    </table>
-                                </div></div>
+                             </div>
                         </div>
                       </form>
+                      <div class="table-responsive d-none" id="body-float">
+                      <div class="card">
+                        <div class="card-header text-center">
+                          <h4 class="card-title">Rapports de Kilométrage</h4>
+                         <div class="d-flex justify-content-between flex-wrap">
+                          <div class="col-6">
+                            <label class="form-check-label">
+                                <span class="form-check-sign" id="start-text">Date du debut</span>
+                            </label>
+                         </div>
+                        <div class="col-6">
+                            <label class="form-check-label">
+                                <span class="form-check-sign" id="end-text">Date de fin</span>
+                            </label>
+                         </div>
+                         </div>
+                    </div>
+                        <div class="card-body">
+                          <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Nom</th>
+                                    <th>Date du début</th>
+                                    <th>Date de fin</th>
+                                    <th>Kilométrage</th>
+                                </tr>
+                            </thead>
+                            <tbody id="float">
+                            
+                            </tbody>
+                        </table>
+                        </div>
+                      </div>
+                    </div>
 					</div>
 				</div>
 				<%- include('components/footer') %>
@@ -114,4 +131,89 @@
       });
     });
   </script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.8/handlebars.min.js"></script>
+    <script id="entry-template" type="text/x-handlebars-template">
+      {{#each data}}
+  <tr>
+    <td>{{this.index }}</td>
+    <td>{{ this.name }}</td>
+    <td>{{ this.startDate }}</td>
+    <td>{{ this.endDate }}</td>
+    <td>{{ this.kilometre }} km</td>
+  </tr>
+{{~/each}}
+    </script>
+<script>
+const select = document.getElementById('select-float')
+const floatRapport = document.getElementById('body-float')
+const loading = document.getElementById('loading-message')
+const btnNew = document.getElementById('new')
+const start = document.getElementById('start')
+const end = document.getElementById('end')
+const startText = document.getElementById('start-text')
+const endText = document.getElementById('end-text')
+
+function newRapport(){
+  btnNew.classList.add()
+  select.classList.remove('d-none')
+          select.classList.add('d-flex')
+          loading.classList.add('d-none')
+}
+
+start.addEventListener('input', function(){
+  const valueStart = this.value
+  startText.textContent = "Date du début : " +valueStart
+} )
+end.addEventListener('input', function(){
+  const valueEnd = this.value
+  endText.textContent = "Date de fin : " +valueEnd
+} )
+
+
+ const form = document.getElementById('formRapport')
+
+ form.addEventListener('submit', (event)=>{
+    event.preventDefault()
+   
+    select.classList.add('d-none')
+    select.classList.remove('d-flex')
+    loading.classList.remove('d-none')
+    let formData = new FormData(event.currentTarget);
+    let formObj = Object.fromEntries(formData)
+
+console.log(formObj)
+     fetch('/api/rapport', {
+            method: 'POST',
+            headers: {
+                'Content-type':'application/json',
+            },
+            body: JSON.stringify(formObj)
+        })
+        .then(response => response.json())
+        .then(data => {
+          float(data)
+          floatRapport.classList.remove('d-none')
+          loading.classList.add('d-none')
+            console.log("Reponse du serveur :", data)
+        })
+        .catch((error) => {
+          select.classList.remove('d-none')
+          select.classList.add('d-flex')
+          loading.classList.add('d-none')
+
+            console.log("Erreur:", error);
+        });
+ 
+ })
+
+
+ function float(data){
+ var source = document.getElementById("entry-template").innerHTML;
+var template = Handlebars.compile(source);
+
+var context = { data: data };
+var html = template(context);
+document.getElementById('float').innerHTML = html;
+}
+ </script>
 </html>

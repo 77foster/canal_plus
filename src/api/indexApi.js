@@ -65,7 +65,7 @@ export default class indexApi {
     } catch (error) {}
   }
 
-  async  #dailyReport(startDate, endDate, idVoiture) {
+  async #dailyReport(startDate, endDate, idVoiture) {
     const sessionId = await this.#connexion();
 
     return new Promise((resolve, reject) => {
@@ -86,22 +86,18 @@ export default class indexApi {
 
           if (vehicule) {
             km = vehicule.km;
-            console.log(vehicule.km);
             resolve(km);
           } else {
-            console.log(0);
             resolve(0);
           }
         })
         .catch(function (error) {
-          console.log(error);
           reject(error);
         });
     });
   }
 
   async #parDate(startDateValue, endDateValue, selectValue) {
-
     const startDate = new Date(startDateValue);
     const endDate = new Date(endDateValue);
 
@@ -125,30 +121,35 @@ export default class indexApi {
       kilometre += km;
     }
 
-   
-
     return kilometre;
   }
 
-  async rapport(startDate, endDate, vehicules){
-    const kilometre = {}
-    let i = 0
+  async rapport(startDate, endDate, vehicules) {
+    const rapports = [];
+    let i = 0;
     for (const key in vehicules) {
-      i++
-     kilometre[key] = await this.#parDate(startDate, endDate, vehicules[key])
+      i++;
+      const km = await this.#parDate(startDate, endDate, vehicules[key]);
+      rapports.push({
+        index: i,
+        startDate: startDate,
+        endDate: endDate,
+        name: key,
+        kilometre: km.toFixed(2),
+      });
     }
 
-    return kilometre;
+    return rapports;
   }
 
   #date(date) {
     const IsoDate = new Date(date);
     const lastDate = new Date(date);
     lastDate.setHours(24, 59, 59, 0);
-  
+
     const startDate = IsoDate.toISOString();
     const endDate = lastDate.toISOString();
-  
+
     return {
       startDate: startDate,
       endDate: endDate,

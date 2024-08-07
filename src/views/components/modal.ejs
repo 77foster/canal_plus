@@ -14,22 +14,30 @@
                     <div class="d-flex justify-content-center">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Prénom*</label>
-                            <input type="text" name="prenom" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Prénom de l'utilisateur">
+                            <input type="text" name="prenom" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Prénom de l'utilisateur" required>
                           </div>
                           <div class="form-group">
                             <label for="exampleInputEmail1">Nom*</label>
-                            <input type="text" name="nom" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nom de l'utilisateur">
+                            <input type="text" name="nom" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nom de l'utilisateur" required>
                           </div>
                     </div>
                     <div class="form-group">
+                      <label for="exampleInputEmail1">Rôle</label>
+                      <select name="role" class="form-control form-control-sm" id="exampleFormControlSelect1" required+>
+                        <option value="Utilisateur" selected>Utilisateur</option>
+                        <option value="Administrateur">Administrateur</option>
+                      </select></div>
+                    <div class="form-group">
                       <label for="exampleInputEmail1">Adresse email*</label>
-                      <input type="email" name="email" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Entrez un email">
+                      <input type="email" name="email" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Entrez un email" required>
                     </div>
                   
                     <div class="form-group">
                       <label for="exampleInputEmail1">Mot de passe</label>
                       <input type="password" name="password" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="12345678" disabled>
                     </div>
+              
+                    
                     <button type="submit" class="btn btn-primary">Submit</button>
                   </form>
             </div>

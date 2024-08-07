@@ -62,9 +62,15 @@ export default class apiController {
       res.json(user);
     }
   }
-  async rapport(req, res) {
-    const data = await api.getVehicules();
-    const lengthData = data.length ;
-    res.send(lengthData);
+  async rapport(req, res){
+    let data = req.body;
+    const newData = {};
+    for (const key in data) {
+      if (key !== "start" && key !== "end") {
+        newData[key] = data[key];
+      }
+    }
+    const nData = await api.rapport(data['start'], data['end'], newData)
+    res.json(nData);
   }
 }
