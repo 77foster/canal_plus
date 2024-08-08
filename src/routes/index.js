@@ -5,7 +5,8 @@ import publicController from "../controllers/publicController.js";
 const ctrl = new indexController();
 const publicCtrl = new publicController();
 /* GET home page. */
-router.get("/", (req, res) => ctrl.index(req, res));
+router.get("/", (req, res) => ctrl.dashboard(req, res));
+router.get("/login", (req, res) => publicCtrl.login(req, res));
 
 router.get("/float", (req, res) => ctrl.float(req, res));
 

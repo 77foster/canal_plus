@@ -56,7 +56,7 @@
                                 <div class="col-6" id="new">
                                   <p class="d-flex justify-content-center ">	
                                     <button class="btn btn-primary" >
-                                        <i class="icon-big la la-share" onclick="newRapport()"></i>
+                                        <i class="icon-big la la-share"></i>
                                         New
                                     </button>
                                 </p>
@@ -80,7 +80,7 @@
                                     <% data.forEach((item, i)=>{%>
                                     <li class="list-group-item m-2">
                                         <label class="form-check-label">
-                                            <input class="form-check-input option" id="<%= item.name %>" name="<%= item.name %>" type="checkbox" value="<%= item.id %>">
+                                            <input class="form-check-input option" id="<%= item.name %>" name="<%= item.id %>" type="checkbox" value="<%= item.name %>&<%= item.brand %>">
                                             <span class="form-check-sign"><%= i+1 %>. <%= item.name %></span>
                                         </label>
                                     </li>
@@ -113,8 +113,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Nom</th>
-                                    <th>Date du début</th>
-                                    <th>Date de fin</th>
+                                    <th>Model</th>
                                     <th>Kilométrage</th>
                                 </tr>
                             </thead>
@@ -126,7 +125,7 @@
                       </div>
                       <div class="conatainer py-3">
                         <p class="d-flex justify-content-center ">
-                            <button class="btn btn-primary" onclick="toPdf()">
+                            <button class="btn btn-primary" onclick="document.title = newTitle;toPdf()">
                                 <i class="icon-big la la-file-pdf-o"></i> 
                                 Génerer le pdf
                             </button>
@@ -144,18 +143,18 @@
 </body>
 
 <%- include('components/scripts') %>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.8/handlebars.min.js"></script>
-    <script id="entry-template" type="text/x-handlebars-template">
-      {{#each data}}
-  <tr>
-    <td>{{this.index }}</td>
-    <td>{{ this.name }}</td>
-    <td>{{ this.startDate }}</td>
-    <td>{{ this.endDate }}</td>
-    <td>{{ this.kilometre }} km</td>
-  </tr>
-{{~/each}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.8/handlebars.min.js"></script>
+<script id="entry-template" type="text/x-handlebars-template">
+     
+        {{#each data}}
+    <tr>
+      <td>{{this.index }}</td>
+      <td>{{ this.name }}</td>
+      <td>{{ this.model }}</td>
+      <td>{{ this.kilometre }} km</td>
+    </tr>
+  {{~/each}}
+      
     </script>
     
     <script src="assets/js/scripts/script_rapport.js"></script>

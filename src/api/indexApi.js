@@ -131,12 +131,12 @@ export default class indexApi {
 
     for (const key in vehicules) {
       i++;
-      const km = await this.#parDate(startDate, endDate, vehicules[key]);
+      let words =vehicules[key].split("&")
+      const km = await this.#parDate(startDate, endDate, key);
       rapports.push({
         index: i,
-        startDate: startDate,
-        endDate: endDate,
-        name: key,
+        name: words[0],
+        model:words[1],
         kilometre: km.toFixed(2),
       });
     }

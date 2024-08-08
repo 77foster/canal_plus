@@ -6,16 +6,10 @@ const start = document.getElementById("start");
 const end = document.getElementById("end");
 const startText = document.getElementById("start-text");
 const endText = document.getElementById("end-text");
+var valueStart;
+var valueEnd;
 
 var floatData;
-
-function newRapport() {
-  btnNew.classList.add();
-  select.classList.remove("d-none");
-  select.classList.add("d-flex");
-  loading.classList.add("d-none");
-}
-
 function dateString(dateString) {
   // Conversion de la date en objet Date
   let date = new Date(dateString);
@@ -49,11 +43,11 @@ function getMonthName(mois) {
 }
 
 start.addEventListener("input", function () {
-  const valueStart = this.value;
+ valueStart = this.value;
   startText.textContent = "Rapport du " + dateString(valueStart);
 });
 end.addEventListener("input", function () {
-  const valueEnd = this.value;
+  valueEnd = this.value;
   endText.textContent = "au " + dateString(valueEnd);
 });
 
@@ -81,7 +75,7 @@ form.addEventListener("submit", (event) => {
       float(data);
       floatRapport.classList.remove("d-none");
       loading.classList.add("d-none");
-      console.log("Reponse du serveur :", data);
+      floatData = data;
     })
     .catch((error) => {
       select.classList.remove("d-none");
@@ -147,72 +141,66 @@ function dateActuelle() {
   paragraphe.textContent = "Kinshasa le " + dateFormatee;
 }
 
-dateActuelle();
+function dateActuelle2() {
+  let dateActuelle = new Date();
+
+  // Extraire les éléments de la date
+  let jour = dateActuelle.getDate();
+  let mois = dateActuelle.getMonth() + 1;
+  let annee = dateActuelle.getFullYear();
+
+  // Formater la date
+  let dateFormatee = `${jour.toString().padStart(2, "0")}/${mois
+    .toString()
+    .padStart(2, "0")}/${annee}`;
+
+  // Récupérer l'élément paragraphe et y insérer la date
+  let date = "Kinshasa le " + dateFormatee;
+  return date;
+}
 
 function toPdf() {
-  window.print()
-  /* const nameFile = "Rapport_du_"+date()+".pdf"
-  const element = document.getElementById("content-pdf");
-  var opt = {
-    margin: 0.5,
-    filename: nameFile,
-    image: { type: "jpeg", quality: 0.98 },
-    html2canvas: { scale: 2 },
-    jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
-  };
-
-  console.log(element);
-  console.log(element.offsetWidth, element.offsetHeight)
-  // New Promise-based usage:
- html2pdf().set(opt).from(element).toPdf().save();
-
-
- 
- */
-
-  // Chemin relatif vers le fichier HTML du template
- /*  var templatePath = "assets/js/scripts/template.html";
-
-  // Chargez le contenu du template
-  fetch(templatePath)
-    .then(function (response) {
-      return response.text();
-    })
-    .then(function (templateHTML) {
-      var template = Handlebars.compile(templateHTML);
-
-      // Données à insérer dans le template
-      var data = {
-        data: data,
+  fetch("assets/js/scripts/template.html")
+    .then((response) => response.text())
+    .then((template) => {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(template, "text/html");
+      const source = doc.getElementById("template").innerHTML;
+      const templates = Handlebars.compile(source);
+      // Itérer sur le tableau de données et injecter les valeurs dans le template
+      let date = dateActuelle2();
+      let rapport =
+        "Rapport du " + dateString(valueStart) + " au " + dateString(valueEnd);
+      console.log(date);
+      var context = {
+        data: floatData,
+        date,
+        rapport
       };
+      const html = templates(context);
 
-      // Génération du HTML à partir du template et des données
-      var html = template(data);
-
-      generatePDF(html);
+      printHTML(html);
     })
-    .catch(function (error) {
-      console.error("Erreur lors du chargement du template :", error);
-    });
-
-  function generatePDF(template) {
-    // Utilisez le template pour générer le PDF
-    var opt = {
-      margin: 1,
-      filename: "mon-pdf-personnalise.pdf",
-      image: { type: "jpeg", quality: 0.25 },
-      html2canvas: { scale: 2 },
-      jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
-    };
-
-    html2pdf()
-      .from(template)
-      .set(opt)
-      .save()
-      .then(function (pdf) {
-        // Récupérez le chemin du fichier PDF
-        var pdfPath = pdf.output("datauristring");
-        console.log("Chemin du PDF :", pdfPath);
-      });
-  } */
+    .catch((error) => console.error(error));
 }
+function printHTML(html) {
+  // Créer un élément <iframe> temporaire
+  const iframe = document.createElement("iframe");
+  iframe.style.position = "absolute";
+  iframe.style.top = "-100000px";
+  document.body.appendChild(iframe);
+
+  // Écrire le HTML dans l'iframe
+  const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+  iframeDoc.open();
+  iframeDoc.write(html);
+  iframeDoc.close();
+
+  // Imprimer le contenu de l'iframe
+  iframe.contentWindow.print();
+
+  // Supprimer l'iframe
+  document.body.removeChild(iframe);
+}
+
+let newTitle = "Rappport_du_" + date();

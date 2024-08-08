@@ -1,12 +1,12 @@
 import indexApi from '../api/indexApi.js';
 const api = new indexApi()
 export default class indexController{
-
-  async index(req, res ){
+  async dashboard(req, res ){
     const data = await api.getVehicules();
-    const lengthData = data.length ;
+    const lengthData = data?.length ;
     res.render('index', {nbr:lengthData});
   }
+ 
   async float(req, res){
     const data = await api.getVehicules()
     res.render('float', {data});

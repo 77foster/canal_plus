@@ -1,55 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
-    <title>Document</title>
-</head>
-<body>
-    <div class="card" id="content-pdf">
-        <div class="card-header text-center">
-          <h4 class="card-title">Rapports de Kilométrage</h4>
-         <div class="d-flex justify-content-between flex-wrap">
-          <div class="col-6">
-            <label class="form-check-label">
-                <span class="form-check-sign" id="start-text">Date du debut</span>
-                <span class="form-check-sign" id="end-text">Date de fin</span>
-            </label>
-         </div>
-        <div class="col-6">
-            <label class="form-check-label">
-                <span class="form-check-sign" id="date-actuelle"></span>
-            </label>
-         </div>
-         </div>
-    </div>
-        <div class="card-body">
-          <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Nom</th>
-                    <th>Date du début</th>
-                    <th>Date de fin</th>
-                    <th>Kilométrage</th>
-                </tr>
-            </thead>
-            <script id="entry-template" type="text/x-handlebars-template">
-                {{#each data}}
-            <tr>
-              <td>{{this.index }}</td>
-              <td>{{ this.name }}</td>
-              <td>{{ this.startDate }}</td>
-              <td>{{ this.endDate }}</td>
-              <td>{{ this.kilometre }} km</td>
-            </tr>
-          {{~/each}}
-              </script>
-            </tbody>
-        </table>
-       
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--  <title>Rapport de Kilométrage</title> -->
+  </head>
+  <script id="template" type="text/x-handlebars-template">
+  <style>
+    /* x */
+    .header {
+      text-align: center;
+      display: block;
+      background-color: #f2f2f2;
+    }
+    .header .logo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1.5rem;
+    }
+    .date {
+      display: flex;
+      justify-content: space-between;
+      margin: 0 10%;
+      font-size: large;
+    }
+    .table {
+      border: solid 1px black;
+    }
+  </style>
+  <body>
+    <div class="content">
+      <div class="header">
+        <div class="logo">
+          <!--    <img
+            src="assets/img/logo.jpg"
+            alt=""
+            style="border-radius: 100%; width: 100px"
+          /> -->
+          <h1>Float Canal Plus</h1>
+        </div>
+        <div>
+          <h2>Rapport de Kilométrage</h2>
+        </div>
+        <div class="date">
+          <div class="dates">
+            <p>{{rapport}}</p>
+          </div>
+          <div class="daily-date">
+            <p>{{ date }}</p>
+          </div>
         </div>
       </div>
-</body>
+      <div class="table">
+        <table style="border-collapse: collapse; width: 100%">
+          <thead>
+            <tr style="background-color: #747474">
+              <th style="padding: 8px; border: 1px solid #ddd">#</th>
+              <th style="padding: 8px; border: 1px solid #ddd">Nom</th>
+              <th style="padding: 8px; border: 1px solid #ddd">Model</th>
+              <th style="padding: 8px; border: 1px solid #ddd">Kilométrage</th>
+            </tr>
+          </thead>
+          <tbody>
+            
+              {{#each data}}
+                <tr>
+                  <td
+                    style="padding: 8px; border: 1px solid #ddd"
+                  >{{this.index}}</td>
+                  <td
+                    style="padding: 8px; border: 1px solid #ddd"
+                  >{{this.name}}</td>
+                  <td
+                    style="padding: 8px; border: 1px solid #ddd"
+                  >{{this.model}}</td>
+                  <td style="padding: 8px; border: 1px solid #ddd">
+                    {{this.kilometre}}
+                    km
+                  </td>
+                </tr>
+              {{~/each}}
+          
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </script>
+  </body>
 </html>
