@@ -10,7 +10,7 @@
               </button>
             </div>
             <div class="modal-body">
-                <form class="justify-content-center">
+                <form class="justify-content-center" id="form-modal">
                     <div class="d-flex justify-content-center">
                         <div class="form-group">
                             <label for="exampleInputEmail1">Prénom*</label>
@@ -37,10 +37,12 @@
                       <input type="password" name="password" class="form-control form-control-sm" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="12345678" disabled>
                     </div>
               
-                    
+                    <div id="erreur"  class="text-center text-warning d-none">
+                      <p>Erreur veillez réessayer ou changer d'adresse email</p>
+                    </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                   </form>
             </div>
-          </div>
+          </div> 
         </div>
       </div>

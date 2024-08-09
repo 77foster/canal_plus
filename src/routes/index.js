@@ -1,19 +1,36 @@
 import express from "express";
+import User from "../model/user.js";
 var router = express.Router();
 import indexController from "../controllers/indexControllers.js";
-import publicController from "../controllers/publicController.js";
 const ctrl = new indexController();
-const publicCtrl = new publicController();
-/* GET home page. */
-router.get("/", (req, res) => ctrl.dashboard(req, res));
-router.get("/login", (req, res) => publicCtrl.login(req, res));
 
-router.get("/float", (req, res) => ctrl.float(req, res));
+function auth(req, res, next) {
+    const sessionId = req.cookies.sessionId;
+   if (sessionId) {
+    try {
+      User.findOne({
+        where: {
+          cookie: sessionId,
+        },
+      }).then((result) => {
+        if (!result) {
+          return res.redirect("/login");
+        } else {
+          return next();
+        }
+      });
+    } catch (error) {
+     return res.redirect("/login");
+    }
+   } else {
+    return res.redirect("/login");
+   }
+  }
 
-router.get("/rapports", (req, res) => ctrl.rapports(req, res));
-router.post("/rapports", (req, res) => ctrl.rapportPost(req, res));
-router.get("/pdf", async (req, res) => ctrl.pdf(req, res));
-router.get("/profil", async (req, res) => ctrl.profil(req, res));
+router.get("/", auth, (req, res) => ctrl.dashboard(req, res));
+router.get("/float", auth, (req, res) => ctrl.float(req, res));
+router.get("/rapports", auth, (req, res) => ctrl.rapports(req, res));
+router.get("/profil", auth,async (req, res) => ctrl.profil(req, res));
 router.get("/chart", async (req, res) => ctrl.chart(req, res));
 
 export default router;

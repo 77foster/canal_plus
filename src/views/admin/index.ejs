@@ -43,7 +43,7 @@
                                                     <td><%= i + 1 %></td>
                                                     <td><%= nom %></td>
                                                     <td><%= item.email %></td>
-                                                    <td><img src="assets/img/profile.jpg" alt="" width="auto" height="auto"></td>
+                                                    <td><img src="<%= item.photo %>" alt="" width="75" height="auto"></td>
                                                     <td><%= item.role %></td>
                                                     <td>
                                                         <% if (item.status != false ) { %>
@@ -70,26 +70,6 @@
 	<%- include('../components/modal') %>
 </body>
 <%- include('../components/scripts') %>
-<script>
 
-    function status(id){
-        const url = "/api/status/"+id;
-        const data = {
-            status:true
-        }
-        console.log(data)
-        const options = {
-            method:'PUT',
-            headers:{
-                'Content-Type':'applications/json'
-            },
-            body:JSON.stringify(data)
-        }
-    fetch(url, options)
-	.then(res => res.json())
-	.then(data => {
-    location.reload(true)
-    })
-    }
-   </script>
+   <script src="assets/js/scripts/user.js"></script>
 </html>

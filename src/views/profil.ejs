@@ -15,14 +15,14 @@
 							<div class="col-md-6">
 								<div class="card">
 									<div class="card-header text-center">
-										<img src="assets/img/profile.jpg" alt="" width="100%">
-										<h4 class="mt-2">Kalala Mbayi</h4>
+										<img src="" alt="" width="100%" id="profil-img">
+										<h4 class="mt-2" id="profil-nom"></h4>
 									</div>
 									<div class="card-body">
 										<div class="d-flex justify-content-between">
                                             <div>
-                                                <p>mbayifoster@gmail.com</p>
-                                                <p><strong>Utilisateur</strong></p>
+                                                <p id="profil-email"></p>
+                                                <p><strong id="profil-role">Utilisateur</strong></p>
                                             </div>
                                             <div>
                                                 <button class="btn btn-primary btn-sm" id="btn-edit" onclick="afficherForm()">Editer</button>
@@ -37,31 +37,33 @@
 										<h4 class="mt-2">Modifier mes données</h4>
 									</div>
 									<div class="card-body">
-										<form>
+                                        <form id="edit-photo">
                                             <div class="form-group">
                                                 <label for="disableinput">Photo de profile</label>
                                                 <input type="file" class="form-control" id="disableinput" placeholder="Photo de profile">
+                                                <button class="btn btn-success mt-2">Modifier</button>
                                             </div>
+                                        </form>
+										<form id="edit-profil">
                                             <div class="form-group">
                                                 <label for="disableinput">Adresse email</label>
                                                 <input type="text" class="form-control" id="disableinput" placeholder="mbayifoster@gmail.com" disabled="">
                                             </div>
                                             <div class="form-group">
-                                                <label for="disableinput">Nom</label>
-                                                <input type="text" class="form-control" id="disableinput" placeholder="Kalala Mbayi">
-                                            </div>
-                                            <div class="form-group">
                                                 <label for="disableinput">Ancien mot de passe</label>
-                                                <input type="password" class="form-control" id="disableinput" placeholder="Ancien mot de passe">
+                                                <input type="password" name="lastPassword" class="form-control" id="disableinput" placeholder="Ancien mot de passe">
                                             </div>
                                             <div class="form-group">
                                                 <label for="disableinput">Nouveau mot de passe</label>
-                                                <input type="password" class="form-control" id="disableinput" placeholder="Nouveau mot de passe">
+                                                <input type="password" name="password" class="form-control" id="disableinput" placeholder="Nouveau mot de passe">
                                             </div>
                                             <div class="card-action">
-                                                <button class="btn btn-success">Modifier</button>
+                                                <button class="btn btn-success" type="submit">Modifier</button>
                                                 <button type="button" class="btn btn-danger" onclick="retirerForm()">Annuler</button>
                                             </div>
+                                            <div class="d-flex gap-2 gap-md-4 flex-column flex-md-row justify-content-md-center d-none" id="erreur">
+                                                <p class="text-warning">Email ou mot de passe incorrect</p>
+                                              </div>
                                         </form>
 									</div>
 								</div>
@@ -77,21 +79,5 @@
 	<%- include('components/modal') %>
 </body>
 <%- include('components/scripts') %>
-<script>
-    const edit = document.getElementById("edit");
-    const btnEdit = document.getElementById("btn-edit")
-    
-    function afficherForm(){
-        if (edit.classList.contains('d-none')) {
-            edit.classList.remove('d-none');
-        }
-        btnEdit.classList.add('d-none')
-    }
-    
-    function retirerForm(){
-        edit.classList.add('d-none')
-        btnEdit.classList.remove('d-none')
-    }
-        
-      </script>
+<script src="assets/js/scripts/profile.js"></script>
 </html>

@@ -22,6 +22,7 @@ User.init( {
       type:DataTypes.BOOLEAN,
       defaultValue:true
     },
+    cookie: DataTypes.TEXT
   }, {sequelize, modelName: 'user'} );
 
 await sequelize.sync();
